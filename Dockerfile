@@ -15,6 +15,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN usermod -u 1000 www-data
 
 WORKDIR /var/www
+RUN chown -R 777 /var/*
 
 RUN rm -rf /var/www/html && ln -s public html
 
