@@ -8,14 +8,24 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index()
+
+    private $rules = [
+        'name' => 'required|max:255',
+        'is_active' => 'boolean'
+    ];
+
+    public function index(Request $request) //?only_trashed
     {
+        /*if($request->has('only_trashed')) {
+            return Category::onlyTrashed()->get();
+        }*/
         return Category::all();
     }
 
     public function store(Request $request)
     {
-        //
+        $this->validate($request, $this->rules);
+        Category::create($request->all());
     }
 
     public function show(Category $category)
@@ -25,11 +35,14 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        //
+        $this->validate($request, $this->rules);
+        $category->update($request->all());
+        return $category;
     }
 
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return response()->noContent(); //204 - No Content
     }
 }
