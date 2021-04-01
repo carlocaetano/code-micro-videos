@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Gender;
 use Illuminate\Http\Request;
 
@@ -20,12 +21,14 @@ class GenderController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->rules);
-        Gender::create($request->all());
+        $gender = Gender::create($request->all());
+        $gender->refresh();
+        return $gender;
     }
 
     public function show(Gender $gender)
     {
-        $gender;
+        return $gender;
     }
 
     public function update(Request $request, Gender $gender)
