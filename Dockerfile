@@ -12,7 +12,11 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN usermod -u 1000 www-data
+RUN usermod -u 539210745 www-data
+
+RUN usermod --non-unique --uid 539210745 www-data \
+  && groupmod --non-unique --gid 539210745 www-data \
+  && chown -R www-data:www-data /var/www
 
 WORKDIR /var/www
 RUN chown -R 777 /var/*
