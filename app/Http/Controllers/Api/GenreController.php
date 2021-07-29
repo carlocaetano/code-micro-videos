@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 
-class GenderController extends Controller
+class GenreController extends Controller
 {
     private $rules = [
         'name' => 'required|max:255',
@@ -21,26 +21,26 @@ class GenderController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->rules);
-        $gender = Genre::create($request->all());
-        $gender->refresh();
-        return $gender;
+        $genre = Genre::create($request->all());
+        $genre->refresh();
+        return $genre;
     }
 
-    public function show(Genre $gender)
+    public function show(Genre $genre)
     {
-        return $gender;
+        return $genre;
     }
 
-    public function update(Request $request, Genre $gender)
+    public function update(Request $request, Genre $genre)
     {
         $this->validate($request, $this->rules);
-        $gender->update($request->all());
-        return $gender;
+        $genre->update($request->all());
+        return $genre;
     }
 
-    public function destroy(Genre $gender)
+    public function destroy(Genre $genre)
     {
-        $gender->delete();
+        $genre->delete();
         return response()->noContent(); //204 - No Content
     }
 }

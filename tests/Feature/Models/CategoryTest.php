@@ -18,7 +18,7 @@ class CategoryTest extends TestCase
      */
     public function testList()
     {
-        factory(Category::class, 1)->create();
+        factory(Category::class)->create();
         $categories = Category::all();
         $this->assertCount(1, $categories);
         $categoryKey = array_keys($categories->first()->getAttributes());
@@ -76,9 +76,9 @@ class CategoryTest extends TestCase
     public function testUpdate()
     {
         /** @var Category $category */
-        $category = factory(Category::class, 1)->create([
+        $category = factory(Category::class)->create([
             'description' => 'test_description'
-        ])->first();
+        ]);
         $data = [
             'name' => 'test_name_updated',
             'description' => 'test_description_updated',

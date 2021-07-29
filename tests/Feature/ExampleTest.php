@@ -2,20 +2,19 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\TestResponse;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
+    use DatabaseMigrations;
+
     public function testBasicTest()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        /** @var TestResponse $response */
+        $response = $this->get('/api/categories/1');
+        $response->assertStatus(404);
     }
 }
